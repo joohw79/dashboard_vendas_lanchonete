@@ -1,31 +1,24 @@
-# Dashboard de Análise de Vendas para Pequenos Comércios
+# Painel de Vendas para Pequenos Comércios
 
 Projeto da Atividade Extensionista II (CST em Ciência de Dados – UNINTER).
-Solução simples de Business Intelligence em Python: importa uma planilha de vendas,
-valida e trata os dados, calcula indicadores e apresenta um dashboard interativo.
+Dashboard de análise de vendas para uma lanchonete de bairro (São Paulo – SP): importa uma planilha, valida e trata os dados, calcula indicadores e apresenta gráficos e recomendações de ação.
 
-## Como executar
-```
-pip install -r requirements.txt
-streamlit run app.py
-```
+**Acesse o painel online:** https://joohw79.github.io/dashboard_vendas_lanchonete/
 
-## Arquivos
-- `app.py` – interface do dashboard (Streamlit + Plotly)
-- `tratamento.py` – leitura, validação de inconsistências e cálculo de indicadores
-- `insights.py` – análises e textos de storytelling (horários de pico, curva ABC, combos, evolução) com dicas de ação
-- `.streamlit/config.toml` – tema visual (creme, ketchup e mostarda)
-- `gerar_base_ficticia.py` – gera a base **fictícia** usada para desenvolvimento e testes
-- `vendas_lanchonete_ficticia.xlsx` – base fictícia de exemplo
+## Como usar
+1. Abra o link acima (ou o arquivo `index.html` no navegador). O painel já carrega uma base fictícia de demonstração.
+2. Para analisar outra planilha, clique em **Enviar planilha (.xlsx ou .csv)**. O arquivo é lido no próprio navegador e não é enviado a nenhum servidor.
+3. Use os filtros de período, categoria e forma de pagamento e navegue pelas abas.
 
 ## Colunas esperadas na planilha
 `ID_Pedido, Data, Horario (HH:MM), Produto, Categoria, Quantidade, Valor_Unitario, Valor_Total, Forma_Pagamento`
 
-## Resumo e decisões
-A primeira aba conta a história dos dados em quatro perguntas (quando vende, o que sustenta o faturamento, como o cliente compra, para onde o negócio caminha). Cada bloco traz os achados calculados da planilha e uma dica de ação. As estimativas são simulações simples e não consideram custos.
+## Estrutura
+- `index.html`, `css/`, `js/` – painel em HTML, CSS e JavaScript (`tratamento.js` trata os dados, `insights.js` gera as análises e dicas, `app.js` monta a interface)
+- `vendor/` – bibliotecas Plotly.js (gráficos) e SheetJS (leitura de Excel), incluídas localmente
+- `dados/exemplo.js` – base fictícia de demonstração embutida
+- `versao_python/` – versão alternativa em Python/Streamlit e o gerador da base fictícia (`gerar_base_ficticia.py`)
 
-## Indicadores
-Faturamento, nº de pedidos, ticket médio, itens vendidos, evolução diária, desempenho por dia da
-semana e horário, produtos mais/menos vendidos, participação por categoria e por forma de pagamento.
+Para executar a versão Python: `cd versao_python && pip install -r requirements.txt && streamlit run app.py`
 
 > Os dados do repositório são fictícios. Nenhuma informação real de estabelecimento é publicada.

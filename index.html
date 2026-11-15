@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de Vendas – Lanchonete</title>
+  <meta name="description" content="Dashboard de análise de vendas para pequenos comércios: indicadores, insights e dicas de decisão.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <div class="pagina">
+    <header class="hero">
+      <h1>🍔 Painel de Vendas</h1>
+      <p>Indicadores simples para decidir melhor no dia a dia da lanchonete</p>
+    </header>
+
+    <div id="aviso" class="aviso" role="status" hidden></div>
+
+    <section class="controles" aria-label="Dados e filtros">
+      <div class="grupo">
+        <span class="rotulo">Dados</span>
+        <label class="arquivo">
+          <input type="file" id="arquivo" accept=".xlsx,.xls,.csv">
+          <span>⬆ Enviar planilha (.xlsx ou .csv)</span>
+        </label>
+        <button type="button" id="btnExemplo" class="btn-secundario">Usar base de exemplo (fictícia)</button>
+      </div>
+      <div class="grupo">
+        <span class="rotulo">Período</span>
+        <div class="datas">
+          <input type="date" id="dataIni" aria-label="Data inicial">
+          <span>até</span>
+          <input type="date" id="dataFim" aria-label="Data final">
+        </div>
+      </div>
+      <div class="grupo">
+        <span class="rotulo">Categoria</span>
+        <div id="filtroCategoria" class="chips"></div>
+      </div>
+      <div class="grupo">
+        <span class="rotulo">Forma de pagamento</span>
+        <div id="filtroPagamento" class="chips"></div>
+      </div>
+    </section>
+
+    <div id="conteudo" hidden>
+      <section class="kpis" aria-label="Indicadores principais">
+        <div class="kpi"><span>Faturamento</span><strong id="kpiFat">–</strong></div>
+        <div class="kpi"><span>Pedidos</span><strong id="kpiPed">–</strong></div>
+        <div class="kpi"><span>Ticket médio</span><strong id="kpiTicket">–</strong></div>
+        <div class="kpi"><span>Itens vendidos</span><strong id="kpiItens">–</strong></div>
+      </section>
+
+      <nav class="abas" role="tablist" aria-label="Seções do painel">
+        <button role="tab" class="aba ativa" data-aba="resumo" aria-selected="true">Resumo e decisões</button>
+        <button role="tab" class="aba" data-aba="tempo" aria-selected="false">Vendas no tempo</button>
+        <button role="tab" class="aba" data-aba="cardapio" aria-selected="false">Cardápio</button>
+        <button role="tab" class="aba" data-aba="pagamentos" aria-selected="false">Pagamentos</button>
+        <button role="tab" class="aba" data-aba="qualidade" aria-selected="false">Qualidade dos dados</button>
+      </nav>
+
+      <section id="aba-resumo" class="painel-aba" role="tabpanel">
+        <div id="prioridades"></div>
+        <div class="capitulo"><div id="cap0"></div><div><div id="g-heat" class="grafico"></div></div></div>
+        <div class="capitulo"><div id="cap1"></div><div><div id="g-abc" class="grafico"></div></div></div>
+        <div class="capitulo"><div id="cap2"></div><div><div id="g-itens" class="grafico"></div><div id="g-pares" class="grafico"></div></div></div>
+        <div class="capitulo"><div id="cap3"></div><div><div id="g-tend" class="grafico"></div></div></div>
+      </section>
+
+      <section id="aba-tempo" class="painel-aba" role="tabpanel" hidden>
+        <div class="duas-colunas">
+          <div id="g-dow" class="grafico"></div>
+          <div id="g-hora" class="grafico"></div>
+        </div>
+        <div id="g-mes" class="grafico"></div>
+      </section>
+
+      <section id="aba-cardapio" class="painel-aba" role="tabpanel" hidden>
+        <div class="duas-colunas">
+          <div id="g-top" class="grafico"></div>
+          <div id="g-low" class="grafico"></div>
+        </div>
+        <div id="g-cat" class="grafico"></div>
+        <div class="tabela-wrap"><table id="tabelaProdutos" class="tabela"></table></div>
+      </section>
+
+      <section id="aba-pagamentos" class="painel-aba" role="tabpanel" hidden>
+        <div id="g-pag" class="grafico"></div>
+      </section>
+
+      <section id="aba-qualidade" class="painel-aba" role="tabpanel" hidden>
+        <p>Resumo do tratamento aplicado à planilha enviada:</p>
+        <table id="tabelaQualidade" class="tabela tabela-estreita"></table>
+        <p class="legenda">Linhas duplicadas e inválidas são removidas; valor total ausente é recalculado
+          (quantidade × valor unitário); pagamento ausente vira “Não informado”.</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="vendor/plotly.min.js"></script>
+  <script src="vendor/xlsx.full.min.js"></script>
+  <script src="dados/exemplo.js"></script>
+  <script src="js/tratamento.js"></script>
+  <script src="js/insights.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
