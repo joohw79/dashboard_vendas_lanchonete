@@ -39,7 +39,6 @@ st.markdown(f"""
   button[data-baseweb="tab"] {{font-weight: 600; color: {TINTA_SUAVE};}}
   button[data-baseweb="tab"][aria-selected="true"] {{color: {KETCHUP};}}
   [data-testid="stSidebar"] {{border-right: 1px solid {GRADE};}}
-  .rodape {{color: {TINTA_SUAVE}; font-size: .8rem; text-align: center; margin-top: 28px;}}
   .cap {{background: #fff; border: 1px solid {GRADE}; border-radius: 16px; padding: 18px 20px;
          box-shadow: 0 2px 8px rgba(43,33,24,.05);}}
   .cap .tag {{font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: {KETCHUP};}}
@@ -318,6 +317,3 @@ with aba4:
     st.table(pd.DataFrame(relatorio.items(), columns=["Verificação", "Quantidade"]).astype(str))
     st.caption("Linhas duplicadas e inválidas são removidas; valor total ausente é recalculado "
                "(quantidade × valor unitário); pagamento ausente vira “Não informado”.")
-
-st.markdown('<div class="rodape">Atividade Extensionista II · CST em Ciência de Dados · UNINTER</div>',
-            unsafe_allow_html=True)
